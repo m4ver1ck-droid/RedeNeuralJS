@@ -8,10 +8,48 @@ class Matrix {
         for (let i = 0; i < rows; i++) {
             let array = [];
             for (let j = 0; j < columns; j++) {
-                array.push(Math.floor(Math.random() * 10));
+                array.push(0);
             }
             this.data.push(array);
         }
+    }
+
+    static arrayToMatrix(array) {
+        let matrix = new Matrix(array.length, 1);
+        matrix.matrixMap((elm, i) => {
+            return array[i];
+        })
+        return matrix;
+    }
+
+    // static MatrixToArray(obj) {
+    //     let array = []
+    //     obj.matrixMap((elm) => {
+    //         array.push(elm);
+    //     })
+    //     return array;
+    // }
+
+    print(){
+        console.table(this.data);
+    }
+
+    randomize(){
+        this.matrixMap(() => {
+            return Math.random() * 2 - 1 ;
+        })
+    }
+
+    static matrixMap(A, func) {
+        let matrix = new Matrix(A.rows, A.cols);
+
+        matrix.data = A.data.map((array, i) => {
+            return array.map((num, j) => {
+                return func(num, i, j);
+            })
+        })
+
+        return matrix;
     }
 
     matrixMap(func){
@@ -24,18 +62,15 @@ class Matrix {
     }
 
     static add(A,B){
-        var matrix = new Matrix(A.rows, A.columns);
-        console.log(A.data)
-        console.log(B.data)
+        let matrix = new Matrix(A.rows, A.columns);
         matrix.matrixMap((element,i,j) => {
             return A.data[i][j] + B.data[i][j];
         });
-        console.log(matrix)
         return matrix;
     }
 
     static multiply(A,B){
-        var matrix = new Matrix(A.rows, B.columns);
+        let matrix = new Matrix(A.rows, B.columns);
 
         matrix.matrixMap((element,i,j) => {
             let sum = 0;
