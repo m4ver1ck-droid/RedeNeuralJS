@@ -31,6 +31,22 @@ class Matrix {
             return A.data[i][j] + B.data[i][j];
         });
         console.log(matrix)
+        return matrix;
+    }
+
+    static multiply(A,B){
+        var matrix = new Matrix(A.rows, B.columns);
+
+        matrix.matrixMap((element,i,j) => {
+            let sum = 0;
+            for (let k = 0; k < A.columns; k++) {
+                let firstElement = A.data[i][k];
+                let secondElement = B.data[k][j];
+                sum += firstElement * secondElement;
+            }
+            return sum;
+        });
+        return matrix;
     }
 }
 
