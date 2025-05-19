@@ -1,3 +1,6 @@
 import Matrix from './Matrix.js';
-var matrix = new Matrix(3,3);
+var primeiraMatrix = new Matrix(2,2);
+var segundaMatrix = new Matrix(2,2);
+var matrix = Matrix.add(primeiraMatrix,segundaMatrix);
 console.log('Matrix: ',matrix )
+
